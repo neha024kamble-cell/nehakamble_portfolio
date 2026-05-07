@@ -517,86 +517,6 @@
       line-height: 1.6;
     }
 
-    /* CONTACT */
-    #contact { background: var(--bg); }
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .contact-intro h3 {
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      margin-bottom: 16px;
-    }
-    .contact-email {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--accent);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 40px;
-      letter-spacing: -0.5px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 32px;
-    }
-    .contact-email:hover { color: var(--white); }
-    .social-links { display: flex; flex-direction: column; gap: 0; }
-    .social-link {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: all 0.25s;
-    }
-    .social-link:hover { color: var(--accent); padding-right: 8px; }
-    .social-link span { font-family: 'Playfair Display', serif; font-size: 13px; font-style: italic; letter-spacing: 0; font-weight: 400; }
-    .contact-form { display: flex; flex-direction: column; gap: 20px; }
-    .form-group { display: flex; flex-direction: column; gap: 8px; }
-    label {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    input, textarea {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 14px 18px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.25s;
-      resize: none;
-    }
-    input:focus, textarea:focus { border-color: var(--accent); }
-    textarea { min-height: 120px; }
-    .form-submit {
-      padding: 16px 36px;
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s;
-      align-self: flex-start;
-    }
-    .form-submit:hover { background: var(--accent); color: var(--bg); }
-
     /* FOOTER */
     footer {
       padding: 40px 60px;
@@ -616,6 +536,57 @@
       color: var(--accent);
       font-style: italic;
     }
+
+    /* PROJECT IMAGES */
+    .project-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .project-card:hover .project-img { transform: scale(1.03); }
+    .project-visual-fallback {
+      display: none;
+      width: 100%; height: 100%;
+      align-items: center; justify-content: center;
+      position: absolute; inset: 0;
+      flex-direction: column; gap: 12px;
+    }
+    .project-visual { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+
+    /* Show fallback when no img */
+    .project-visual:not(:has(img[src]:not([src=""]))) .project-visual-fallback,
+    .project-visual img[src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*PGo4OJFILes_SYEVu4e68g.png"] ~ .project-visual-fallback,
+    .project-visual img[src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*pG_PAYUeH2mb4q_Zb2gD2g.png"] ~ .project-visual-fallback,
+    .project-visual img[src="YOUR_PROJECT_3_IMAGE_URL_HERE"] ~ .project-visual-fallback { display: flex; }
+    .project-visual img[src="YOUR_PROJECT_1_IMAGE_URL_HERE"],
+    .project-visual img[src="YOUR_PROJECT_2_IMAGE_URL_HERE"],
+    .project-visual img[src="YOUR_PROJECT_3_IMAGE_URL_HERE"] { display: none; }
+
+    .proj-fallback-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative; z-index: 1;
+    }
+
+    /* HEADSHOT */
+    .headshot-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .headshot-fallback {
+      display: none;
+      width: 100%; height: 100%;
+      align-items: center; justify-content: center;
+      position: absolute; inset: 0;
+    }
+    /* Show fallback when placeholder URL unchanged */
+    .about-avatar img[src="Gemini_Generated_Image_vgbis3vgbis3vgbi.png"] { display: none; }
+    .about-avatar img[src="YOUR_HEADSHOT_IMAGE_URL_HERE"] ~ .headshot-fallback { display: flex; }
 
     /* FADE IN ANIMATION */
     .fade-in {
@@ -655,7 +626,6 @@
       <li><a href="#aboutMe">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#resume">Resume</a></li>
-      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
@@ -665,7 +635,7 @@
     <div class="hero-noise"></div>
     <div class="hero-line"></div>
     <div class="hero-content fade-in">
-      <p class="hero-tag">UX Engineer · AI Product Architecture</p>
+      <p class="hero-tag">UX Engineer · AI Product Architect</p>
       <h1>Neha<br /><em>Kamble.</em></h1>
       <p class="hero-sub">
         I design and engineer intelligent product experiences — bridging the gap between AI systems and human-centred interfaces. Based in Pimpri-Chinchwad, Maharashtra.
@@ -686,18 +656,14 @@
 
       <!-- Project 1 -->
       <div class="project-card fade-in">
-        <div class="project-visual proj-1">
-          <div class="project-visual-inner proj-accent-1">
-            <div class="proj-grid-lines"></div>
-            <div class="proj-circle" style="top:20%;left:30%"></div>
-            <div class="proj-circle" style="bottom:15%;right:20%;width:80px;height:80px"></div>
-            APP
-          </div>
+        <div class="project-visual">
+          <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*PGo4OJFILes_SYEVu4e68g.png" alt="Project 1 screenshot" class="project-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="project-visual-fallback proj-1"><div class="proj-grid-lines"></div><span class="proj-fallback-label">Add Project 1 Image</span></div>
         </div>
         <div class="project-info">
           <p class="project-num">Project — 01</p>
-          <h3>Project Alpha</h3>
-          <p class="project-desc">A brief description of the project — what problem it solves, who it's for, and what makes it special. Add 1–2 sentences to make it yours.</p>
+          <h3>AI User Research Agent</h3>
+          <p class="project-desc">Architected a multi-agent system using CrewAI to perform thematic analysis on raw, conversational interview data while maintaining 100% data privacy via local LLM integration (Ollama/Llama 3)</p>
           <div class="project-tags">
             <span class="tag">Figma</span>
             <span class="tag">UI Design</span>
@@ -705,47 +671,39 @@
             <span class="tag">Research</span>
           </div>
           <div class="project-links">
-            <a href="#" class="proj-link">Live Demo</a>
-            <a href="#" class="proj-link">Case Study</a>
+            <a href="#" class="https://github.com/neha024kamble-cell/ai-ux-persona-agent">GitHub Link</a>
+            <a href="#" class="https://medium.com/@neha024.kamble/how-i-built-an-ai-agent-to-automate-user-persona-creation-d01a579c906f">Case Study</a>
           </div>
         </div>
       </div>
 
       <!-- Project 2 -->
       <div class="project-card fade-in">
-        <div class="project-visual proj-2">
-          <div class="project-visual-inner proj-accent-2">
-            <div class="proj-grid-lines"></div>
-            <div class="proj-circle" style="top:30%;right:25%"></div>
-            <div class="proj-circle" style="bottom:20%;left:10%;width:60px;height:60px"></div>
-            WEB
-          </div>
+        <div class="project-visual">
+          <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*pG_PAYUeH2mb4q_Zb2gD2g.png" alt="Project 2 screenshot" class="project-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="project-visual-fallback proj-2"><div class="proj-grid-lines"></div><span class="proj-fallback-label">Add Project 2 Image</span></div>
         </div>
         <div class="project-info">
           <p class="project-num">Project — 02</p>
-          <h3>Project Beta</h3>
-          <p class="project-desc">A brief description of the project. What was your role? What process did you follow? What was the outcome or impact?</p>
+          <h3>SEO Insight Transformer</h3>
+          <p class="project-desc">Architected a React-based tool using Cursor and v0.dev to automate the synthesis of technical audit data into business-priority dashboards. Implemented an 'Agentic Reasoning' UI to increase user trust and transparency in AI outputs.</p>
           <div class="project-tags">
             <span class="tag">React</span>
             <span class="tag">CSS</span>
             <span class="tag">Motion</span>
           </div>
           <div class="project-links">
-            <a href="#" class="proj-link">Live Demo</a>
-            <a href="#" class="proj-link">View Code</a>
+            <a href="#" class="https://github.com/neha024kamble-cell/SEO-Insight-Transformer">GitHub Link</a>
+            <a href="#" class="https://medium.com/@neha024.kamble/beyond-the-syntax-how-vibe-coding-is-redefining-the-product-architect-2db4d39739d4">Case Study</a>
           </div>
         </div>
       </div>
 
       <!-- Project 3 -->
       <div class="project-card fade-in">
-        <div class="project-visual proj-3">
-          <div class="project-visual-inner proj-accent-3">
-            <div class="proj-grid-lines"></div>
-            <div class="proj-circle" style="top:15%;left:15%"></div>
-            <div class="proj-circle" style="bottom:25%;right:15%;width:100px;height:100px"></div>
-            SYS
-          </div>
+        <div class="project-visual">
+          <img src="YOUR_PROJECT_3_IMAGE_URL_HERE" alt="Project 3 screenshot" class="project-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="project-visual-fallback proj-3"><div class="proj-grid-lines"></div><span class="proj-fallback-label">Add Project 3 Image</span></div>
         </div>
         <div class="project-info">
           <p class="project-num">Project — 03</p>
@@ -774,15 +732,17 @@
     </div>
     <div class="about-grid">
       <div class="about-avatar fade-in">
-        <div class="avatar-placeholder">NK</div>
-        <div class="avatar-frame"></div>
+        <img src="Gemini_Generated_Image_vgbis3vgbis3vgbi.png" alt="Neha Kamble" class="headshot-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="headshot-fallback">
+          <div class="avatar-placeholder">NK</div>
+        </div>
         <div class="about-frame"></div>
         <span class="avatar-label">Neha Kamble</span>
       </div>
       <div class="about-text fade-in">
         <h3>Hello! I'm Neha Kamble.</h3>
         <p>
-          A UX Engineer & AI Product Architect based in Pimpri-Chinchwad, Maharashtra. I sit at the intersection of design, engineering, and artificial intelligence — crafting products that are not just beautiful, but genuinely intelligent.
+          A UX Engineer & AI Product Architect based in Pune, Maharashtra. I sit at the intersection of design, engineering, and artificial intelligence — crafting products that are not just beautiful, but genuinely intelligent.
         </p>
         <p>
           I specialise in translating complex AI capabilities into intuitive user experiences, architecting product systems that scale with both technology and human needs. My work spans research, interaction design, front-end engineering, and AI product strategy.
@@ -792,7 +752,7 @@
         </p>
         <div class="about-stats">
           <div class="stat">
-            <span class="stat-num">3+</span>
+            <span class="stat-num">6+</span>
             <span class="stat-label">Years Exp.</span>
           </div>
           <div class="stat">
@@ -876,42 +836,6 @@
         <div class="resume-decoration-text">
           Open to<br />new opportunities
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-header fade-in">
-      <span class="section-num">05</span>
-      <h2>Contact</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="contact-layout">
-      <div class="contact-intro fade-in">
-        <h3>Let's work together.</h3>
-        <a href="mailto:neha@nehakamble.com" class="contact-email">neha@nehakamble.com</a>
-        <div class="social-links">
-          <a href="#" class="social-link">LinkedIn <span>Connect →</span></a>
-          <a href="#" class="social-link">GitHub <span>Follow →</span></a>
-          <a href="#" class="social-link">Dribbble <span>View →</span></a>
-          <a href="#" class="social-link">Behance <span>View →</span></a>
-        </div>
-      </div>
-      <div class="contact-form fade-in">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" placeholder="Your name" />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="your@email.com" />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" placeholder="Tell me about your project…"></textarea>
-        </div>
-        <button class="form-submit">Send Message →</button>
       </div>
     </div>
   </section>
